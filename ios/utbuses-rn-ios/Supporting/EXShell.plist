@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>developmentUrl</key>
+	<string>expd7a0c3906bc54f8492af403aa6dad5a4://mb-bpf.syousif.utbuses-rn-ios.exp.direct:80</string>
+	<key>isShell</key>
+	<true/>
+	<key>manifestUrl</key>
+	<string>exp://exp.host/@syousif/utbuses-rn-ios</string>
+</dict>
+</plist>

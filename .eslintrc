@@ -1,0 +1,7 @@
+{
+  "extends": "exponent/react",
+  "rules": {
+    "react/jsx-closing-bracket-location": 0,
+    "no-unused-vars": [1, { "vars": "all", "args": "after-used" }]
+  }
+}

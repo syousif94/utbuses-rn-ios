@@ -1,0 +1,33 @@
+{
+  "name": "utbuses-rn-ios",
+  "description": "An empty new project",
+  "slug": "utbuses-rn-ios",
+  "privacy": "public",
+  "sdkVersion": "13.0.0",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "primaryColor": "#cccccc",
+  "icon": "./assets/images/logo.png",
+  "loading": {
+    "icon": "./assets/images/logo.png"
+  },
+  "packagerOpts": {
+    "assetExts": [
+      "ttf",
+      "mp4"
+    ]
+  },
+  "ios": {
+    "supportsTablet": false,
+    "bundleIdentifier": "me.syousif.UTBuses"
+  },
+  "android": {
+    "package": "me.syousif.UTBuses"
+  },
+  "isDetached": true,
+  "detach": {
+    "scheme": "expd7a0c3906bc54f8492af403aa6dad5a4",
+    "iosExponentViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v1.12.2-sdk13.0.0-15988a32-c353-4625-a704-a430f509f621.tar.gz",
+    "androidExponentViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v1.12.1-sdk13.0.0-f2251910-2ae0-4cc9-9cd0-4c28771fef12.tar.gz"
+  }
+}
