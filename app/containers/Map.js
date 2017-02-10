@@ -1,38 +1,39 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { polylineSelector, stopsSelector } from 'app/selectors/Route';
 import { Components } from 'exponent';
 const {
   MapView,
   MapView: {
     Polyline,
-    Marker,
   },
 } = Components;
-import { Foundation } from '@exponent/vector-icons';
-import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
 } from 'react-native';
-import polyline from '@mapbox/polyline';
 
 import StopMarker from 'app/components/StopMarker';
+import HeaderBar from 'app/components/HeaderBar';
+import MenuButton from 'app/components/MenuButton';
 
-import stops from '../../642stops';
+const mapStateToProps = state => ({
+  selectedStop: state.ui.selectedStop,
+  polyline: polylineSelector(state),
+  stops: stopsSelector(state),
+});
 
-const line642 = polyline.decode('mgzwDrqosQuD@gBL{CfCSNe@T}@VYBm@A[vLSjFMxEwL]Q`FIv@CbDI|HhHZ?@MpC?AI`DKzD?@GbCA~A??QjEvDTdBD~F\\lCJp@FdDLpDTT_ITwHNgERqENyEnFRJaFPeFF_CZuHf@oRJu@uCGoG}@eDa@').map(coords => ({
-    latitude: coords[0],
-    longitude: coords[1],
-  }));
-
+@connect(mapStateToProps)
 class BusMap extends Component {
-
   render() {
+    const {
+      polyline,
+      stops,
+      selectedStop,
+    } = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.text}>642 CCW</Text>
-        </View>
+        <HeaderBar />
         <MapView
           style={styles.map}
           initialRegion={{
@@ -47,7 +48,7 @@ class BusMap extends Component {
         >
           <Polyline
             strokeWidth={4}
-            coordinates={line642}
+            coordinates={polyline}
             strokeColor="rgba(17,51,183,0.4)"
           />
           {
@@ -55,19 +56,15 @@ class BusMap extends Component {
               <StopMarker
                 key={i}
                 stop={stop}
+                selectedStop={selectedStop}
               />
             ))
           }
         </MapView>
-        <View style={[styles.button, styles.right]}>
-          <TouchableOpacity style={styles.iconWrap}>
-            <Foundation name="list" size={18} color="black" />
-          </TouchableOpacity>
-        </View>
+        <MenuButton />
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -75,50 +72,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  header: {
-    height: 60,
-    paddingTop: 18,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontFamily: 'clear-sans-medium',
-    fontSize: 16,
-  },
   map: {
     flex: 1,
-  },
-  button: {
-    position: 'absolute',
-    bottom: 25,
-    height: 44,
-    width: 44,
-    borderRadius: 3,
-    backgroundColor: '#fff',
-  },
-  right: {
-    right: 25,
-  },
-  iconWrap: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  marker: {
-    height: 14,
-    width: 14,
-    backgroundColor: '#1133B7',
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#fff',
-    shadowColor: '#000',
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowRadius: 2,
   },
 });
 

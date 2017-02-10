@@ -1,7 +1,11 @@
 import Exponent, { Font, Components } from 'exponent';
 import React from 'react';
+import { Provider } from 'react-redux';
 
-import BusMap from 'app/containers/Map'
+import configureStore from 'app/redux';
+import BusMap from 'app/containers/Map';
+
+const store = configureStore();
 
 class App extends React.Component {
 
@@ -28,10 +32,12 @@ class App extends React.Component {
     if (this.state.fontLoading) {
       return (
         <Components.AppLoading />
-      )
+      );
     }
     return (
-      <BusMap />
+      <Provider store={store}>
+        <BusMap />
+      </Provider>
     );
   }
 }

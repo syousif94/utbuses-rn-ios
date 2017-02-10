@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { Components } from 'exponent';
 const {
@@ -13,6 +13,7 @@ const {
 
 class StopMarker extends Component {
   state = {
+    pressed: false,
     selected: false,
   }
 
@@ -22,15 +23,35 @@ class StopMarker extends Component {
     });
   }
 
+  _onPressIn = () => {
+    this.setState({
+      pressed: true,
+    });
+  }
+
+  _onPressOut = () => {
+    this.setState({
+      pressed: false,
+    });
+  }
+
   render() {
-    const color = this.state.selected ? styles.green : styles.purple;
+    const topColor = (this.state.selected || this.state.pressed)
+      ? styles.green
+      : styles.purple;
     return (
       <Marker coordinate={this.props.stop}>
         <View style={styles.wrap}>
           <View style={styles.base} />
-          <TouchableOpacity style={styles.btn} onPress={this._toggleSelected}>
-            <View style={[color, styles.dot]} />
-          </TouchableOpacity>
+          <TouchableWithoutFeedback
+            onPress={this._toggleSelected}
+            onPressIn={this._onPressIn}
+            onPressOut={this._onPressOut}
+          >
+            <View style={styles.btn}>
+              <View style={[topColor, styles.dot]} />
+            </View>
+          </TouchableWithoutFeedback>
         </View>
       </Marker>
     );
@@ -39,16 +60,16 @@ class StopMarker extends Component {
 
 const styles = StyleSheet.create({
   wrap: {
-    height: 44,
-    width: 44,
+    height: 32,
+    width: 32,
     justifyContent: 'center',
     alignItems: 'center',
   },
   base: {
     height: 14,
     width: 14,
-    backgroundColor: '#fff',
     borderRadius: 7,
+    backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOpacity: 0.5,
     shadowOffset: {
